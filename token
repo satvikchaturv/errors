@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Examination {
+    uint256 public attendance;
+    uint256 public attemptNumber;
+    uint256 public age;
+
+    constructor() {
+        attendance = 0;
+        attemptNumber = 0;
+        age = 0;
+    }
+
+    function updateAttendance(uint256 _attendance) public {
+        require(_attendance >= 75, "Attendance should be greater than or equal to 75%");
+        attendance = _attendance;
+    }
+
+    function updateExamCriteria(uint256 _attemptNumber, uint256 _age) public {
+        assert(_age >= 18); 
+        if (_attemptNumber > 3) {
+            revert("No attempt is left to write exam");
+        }
+        attemptNumber = _attemptNumber;
+        age = _age;
+    }
+}
